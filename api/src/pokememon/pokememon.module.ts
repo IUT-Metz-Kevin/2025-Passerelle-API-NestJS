@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { PokememonController } from './pokememon.controller';
 import { PokemonRepository } from './repository/pokememon.repository';
 import { InMemoryPokemonRepository } from './repository/inMemoryPokememon.repository';
+import entities from './database/entities';
 
 @Module({
+  imports: [TypeOrmModule.forFeature(entities)],
   controllers: [PokememonController],
   providers: [
     // Pour injecter PokemonRepository, nous devons manuellement indiquer à Nest comment le faire
